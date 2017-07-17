@@ -8,13 +8,16 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import javax.inject.Inject;
 
@@ -80,6 +83,16 @@ public class LoginActivity extends BaseActivity implements LogInMvpView {
                         startActivity(SigninActivity.getStartIntent(LoginActivity.this));
                         break;
 
+                }
+                return false;
+            }
+        });
+        edit_password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    onLoginClick();
+                    return true;
                 }
                 return false;
             }
