@@ -13,7 +13,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name="rf.digworld.headhands.ui.main.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +26,8 @@
 
         <activity android:name="rf.digworld.headhands.ui.signin.LoginActivity"
             android:label="@string/activity_login"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
