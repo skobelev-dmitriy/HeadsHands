@@ -68,13 +68,13 @@
             android:layout_below="@+id/input_layout_mail"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="24dp">
+            android:layout_marginTop="24dp"
+            app:passwordToggleEnabled="false">
 
             <EditText
                 android:id="@+id/editText_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:ems="10"
                 android:hint="@string/pass"
                 android:inputType="textPassword"
