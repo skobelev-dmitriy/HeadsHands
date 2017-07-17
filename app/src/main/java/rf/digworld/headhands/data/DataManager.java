@@ -47,11 +47,11 @@ public class DataManager {
     }
 
     /**
-     * Получение текущей погоды для города Москвы (id=5601538)
+     * Получение текущей погоды для города Москвы (id=524901)
      * @return
      */
     public Observable<WeatherResponce> getWeather(){
-        return mNetworkService.getWeather(5601538);
+        return mNetworkService.getWeather(524901);
     }
 
 

@@ -5,14 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".LoginActivity">
+    tools:context=".ui.signin.SigninActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme">
-
-
 
 
         <android.support.v7.widget.Toolbar
@@ -22,13 +20,14 @@
             android:background="?attr/colorPrimary"
             android:theme="@style/ToolBarTheme"
             app:popupTheme="@style/AppTheme">
+
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="1"
-                android:text="@string/activity_login"
+                android:text="@string/activity_signin"
                 android:textColor="@color/greyish_brown"
                 android:textSize="@dimen/toolbar_text_size" />
         </android.support.v7.widget.Toolbar>
@@ -80,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/pass"
-                android:imeOptions="actionDone"
+                android:imeOptions="actionNext"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:paddingRight="32dp" />
@@ -100,14 +99,36 @@
             android:padding="4dp"
             android:src="@mipmap/ic_password" />
 
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_password2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/input_layout_password"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:errorEnabled="true"
+            app:passwordToggleEnabled="false">
+
+            <EditText
+                android:id="@+id/editText_password2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/retry_password"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:paddingRight="32dp" />
+        </android.support.design.widget.TextInputLayout>
+
         <Button
-            android:id="@+id/button_login"
+            android:id="@+id/button_signin"
             style="@style/button"
 
-            android:layout_below="@+id/input_layout_password"
+            android:layout_below="@+id/input_layout_password2"
             android:elevation="2dp"
 
-            android:text="@string/login" />
+            android:text="@string/signin" />
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -119,4 +140,5 @@
             android:visibility="gone" />
 
     </RelativeLayout>
+
 </android.support.design.widget.CoordinatorLayout>

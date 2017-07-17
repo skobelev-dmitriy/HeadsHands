@@ -19,4 +19,8 @@
 
     <string name="email_error">Неверный формат email</string>
     <string name="password_error">Пароль дожен быть минимум 6 символов, содержать 1 строчную букву, 1 заглавную, и 1 цифру.</string>
+    <string name="activity_signin">Регистрация</string>
+    <string name="retry_password">Повторите пароль</string>
+    <string name="signin">Зарегистрироваться</string>
+    <string name="equals_password">Пароли не совпадают</string>
 </resources>

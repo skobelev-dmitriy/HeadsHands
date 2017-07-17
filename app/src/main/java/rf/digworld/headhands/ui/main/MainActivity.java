@@ -13,7 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rf.digworld.headhands.R;
 import rf.digworld.headhands.ui.base.BaseActivity;
-import rf.digworld.headhands.ui.signin.LoginActivity;
+import rf.digworld.headhands.ui.login.LoginActivity;
 import rf.digworld.headhands.util.ViewUtil;
 
 public class MainActivity extends BaseActivity {

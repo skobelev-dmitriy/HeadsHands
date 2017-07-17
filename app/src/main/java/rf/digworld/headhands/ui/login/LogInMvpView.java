@@ -1,4 +1,4 @@
-package rf.digworld.headhands.ui.signin;
+package rf.digworld.headhands.ui.login;
 
 import rf.digworld.headhands.data.model.WeatherResponce;
 import rf.digworld.headhands.ui.base.MvpView;

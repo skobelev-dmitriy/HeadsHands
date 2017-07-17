@@ -14,7 +14,7 @@ import org.junit.runner.RunWith;
 
 import rf.digworld.headhands.test.common.rules.TestComponentRule;
 import rf.digworld.headhands.ui.main.MainActivity;
-import rf.digworld.headhands.ui.signin.LoginActivity;
+import rf.digworld.headhands.ui.login.LoginActivity;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;

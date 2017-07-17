@@ -24,8 +24,11 @@
 
 
 
-        <activity android:name="rf.digworld.headhands.ui.signin.LoginActivity"
-            android:label="@string/activity_login"
+        <activity android:name="rf.digworld.headhands.ui.login.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="rf.digworld.headhands.ui.signin.SigninActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
         </activity>

@@ -11,8 +11,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import rf.digworld.headhands.data.DataManager;
 import rf.digworld.headhands.data.model.WeatherResponce;
 import rf.digworld.headhands.test.common.TestDataFactory;
-import rf.digworld.headhands.ui.signin.LogInMvpView;
-import rf.digworld.headhands.ui.signin.LoginPresenter;
+import rf.digworld.headhands.ui.login.LogInMvpView;
+import rf.digworld.headhands.ui.login.LoginPresenter;
 import rf.digworld.headhands.util.RxSchedulersOverrideRule;
 import rx.Observable;
 
@@ -52,7 +52,7 @@ public class LoginPresenterTest {
 
         loginPresenter.getWeather();
         verify(mMockLoginMvpView).showLoginSuccessful(weatherResponce);
-        verify(mMockLoginMvpView, never()).showError();
+        verify(mMockLoginMvpView, never()).showError("null");
     }
 
 
@@ -64,7 +64,7 @@ public class LoginPresenterTest {
                 .getWeather();
 
         loginPresenter.getWeather();
-        verify(mMockLoginMvpView).showError();
+        verify(mMockLoginMvpView).showError("null");
         verify(mMockLoginMvpView, never()).showLoginSuccessful(any(WeatherResponce.class));
     }
 }

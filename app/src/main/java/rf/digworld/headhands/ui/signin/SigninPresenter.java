@@ -9,26 +9,25 @@ import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import timber.log.Timber;
 
 /**
  * Created by Дмитрий on 27.03.2016.
  */
-public class LoginPresenter extends BasePresenter<LogInMvpView> {
+public class SigninPresenter extends BasePresenter<SigninMvpView> {
     private final DataManager mDataManager;
     private Subscription mSubscription;
     @Inject
-    public LoginPresenter(DataManager dataManager) {
+    public SigninPresenter(DataManager dataManager) {
         mDataManager = dataManager;
     }
 
     @Override
-    public void attachView(LogInMvpView mvpView) {
+    public void attachView(SigninMvpView mvpView) {
         super.attachView(mvpView);
     }
 
 
-    public void login(String email,String password){
+    public void signin(String email,String password){
         checkViewAttached();
         getMvpView().showProgress();
         mSubscription = mDataManager.login(email,password)
@@ -37,6 +36,7 @@ public class LoginPresenter extends BasePresenter<LogInMvpView> {
                 .subscribe(new Subscriber<String>() {
                     @Override
                     public void onCompleted() {
+                        getMvpView().showSuccessful();
                     }
 
                     @Override
@@ -46,9 +46,7 @@ public class LoginPresenter extends BasePresenter<LogInMvpView> {
 
                     @Override
                     public void onNext(String result) {
-                        if (result.equals("Success")) {
-                            getWeather();
-                        } else {
+                        if (!result.equals("Success")) {
                             getMvpView().showError(result);
                         }
                     }
@@ -56,35 +54,7 @@ public class LoginPresenter extends BasePresenter<LogInMvpView> {
 
 
     }
-    public void getWeather(){
-        checkViewAttached();
-        getMvpView().showProgress();
-        mSubscription = mDataManager.getWeather()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<WeatherResponce>() {
-                    @Override
-                    public void onCompleted() {
-                    }
 
-                    @Override
-                    public void onError(Throwable e) {
-
-                        getMvpView().showError(e.getMessage());;
-                    }
-
-                    @Override
-                    public void onNext(WeatherResponce result) {
-                        if (result.getError()==null) {
-                            getMvpView().showLoginSuccessful(result);
-                        } else {
-                            getMvpView().showError(result.getError());
-                        }
-                    }
-                });
-
-
-    }
     @Override
     public void detachView() {
         super.detachView();
