@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#222222</color>
+    <color name="primary_dark">#000000</color>
+    <color name="accent">#ffffff</color>
+    <color name="gray">#ffdfdfdf</color>
+
+    <!--Project Colors !-->
+    <color name="tangerine">#ff9b00</color>
+    <color name="brownish_grey">#6e6e6e</color>
+    <color name="greyish_brown">#414141</color>
+    <color name="dark_sky_blue">#4e92df</color>
+    <color name="white_two">#f4f4f4</color>
+</resources>
