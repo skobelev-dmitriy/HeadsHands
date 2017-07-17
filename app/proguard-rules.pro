@@ -1,6 +1,6 @@
 # Add project specific ProGuard rules here.
 # By default, the flags in this file are appended to flags specified
-# in <android-sdk>/tools/proguard/proguard-android.txt
+# in /Users/rgs/Android Studio.app/sdk/tools/proguard/proguard-android.txt
 # You can edit the include path and order by changing the proguardFiles
 # directive in build.gradle.
 #
@@ -15,62 +15,115 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+ -keep class * implements android.os.Parcelable {
+   public static final android.os.Parcelable$Creator *;
+ }
 
-# ButterKnife rules
--keep class butterknife.** { *; }
--dontwarn butterknife.internal.**
--keep class **$$ViewBinder { *; }
-
--keepclasseswithmembernames class * {
-    @butterknife.* <fields>;
+-keep public class * extends android.content.ContentProvider
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
 }
+#-keepresourcexmlelements manifest/application/meta-data@value=GlideModule
 
--keepclasseswithmembernames class * {
-    @butterknife.* <methods>;
-}
+# Disable enum optimization because of ProGuard bug: http://sourceforge.net/p/proguard/bugs/490/
+-optimizations !class/unboxing/enum
+ #Rules to remove debug logging
+#-assumenosideeffects class android.util.Log {
+#   public static *** d(...);
+#    public static *** v(...);
+#}
+-dontwarn com.squareup.picasso.**
 
-# Retrofit rules
--dontwarn retrofit.**
--keep class retrofit.** { *; }
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
 -keepattributes Signature
 -keepattributes Exceptions
 
-# OkHttp rules
--dontwarn okio.**
--dontwarn com.squareup.okhttp.**
-
-# Otto rules
--keepclassmembers class ** {
-    @com.squareup.otto.Subscribe public *;
-    @com.squareup.otto.Produce public *;
+-keepclasseswithmembers class * {
+    @retrofit2.http.* <methods>;
 }
+# ButterKnife 7
 
-# RxJava rules
-# RxAndroid will soon ship with rules so this may not be needed in the future
-# https://github.com/ReactiveX/RxAndroid/issues/219
--dontwarn sun.misc.Unsafe
--keep class rx.internal.util.unsafe.** { *; }
+# Retain generated class which implement Unbinder.
+-keep public class * implements butterknife.Unbinder { public <init>(...); }
 
-# EasyAdapter rules
--keepclassmembers class * extends uk.co.ribot.easyadapter.ItemViewHolder {
-    public <init>(...);
- }
+# Prevent obfuscation of types which use ButterKnife annotations since the simple name
+# is used to reflectively look up the generated ViewBinding.
+-keep class butterknife.*
+-keepnames class * { @butterknife.Bind *;}
 
-# Gson rules
--keepattributes Signature
+-dontwarn butterknife.internal.**
+-keep class **$$ViewBinder { *; }
+
+-keepclasseswithmembernames class * { @butterknife.* <methods>; }
+-keepclasseswithmembernames class * { @butterknife.* <fields>; }
+
+# Okio
 -keep class sun.misc.Unsafe { *; }
-# TODO change to match your package model
-# Keep non static or private fields of models so Gson can find their names
--keepclassmembers class uk.co.ribot.androidboilerplate.data.model.** {
-    !static !private <fields>;
-}
-# TODO change to match your Retrofit services (only if using inner models withing the service)
-# Some models used by gson are inner classes inside the retrofit service
--keepclassmembers class uk.co.ribot.androidboilerplate.data.remote.RibotsService$** {
-    !static !private <fields>;
-}
+-dontwarn java.nio.file.*
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+-dontwarn okio.**
 
-# Produces useful obfuscated stack traces
-# http://proguard.sourceforge.net/manual/examples.html#stacktrace
--renamesourcefileattribute SourceFile
--keepattributes SourceFile,LineNumberTable
+# RxJava 0.21
+
+-keep class rx.schedulers.Schedulers {
+    public static <methods>;
+}
+-keep class rx.schedulers.ImmediateScheduler {
+    public <methods>;
+}
+-keep class rx.schedulers.TestScheduler {
+    public <methods>;
+}
+-keep class rx.schedulers.Schedulers {
+    public static ** test();
+}
+#https://github.com/ReactiveX/RxJava/issues/3097
+-keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
+    long producerIndex;
+    long consumerIndex;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
+    rx.internal.util.atomic.LinkedQueueNode producerNode;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
+    rx.internal.util.atomic.LinkedQueueNode consumerNode;
+}
+-dontwarn rx.internal.util.unsafe.**
+#WebWiew
+-keep class android.webkit.WebViewClient
+-keep class * extends android.webkit.WebViewClient
+-keepclassmembers class * extends android.webkit.WebViewClient {
+    <methods>;
+}
+-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+   public *;
+}
+#-keep class uk.co.chrisjenx.calligraphy.* { *; }
+#-keep class uk.co.chrisjenx.calligraphy.*$* { *; }
+
+##---------------Begin: proguard configuration for Gson  ----------
+# Gson uses generic type information stored in a class file when working with fields. Proguard
+# removes such information by default, so configure it to keep all of it.
+-keepattributes Signature
+
+# For using GSON @Expose annotation
+-keepattributes *Annotation*
+
+# Gson specific classes
+-keep class sun.misc.Unsafe { *; }
+#-keep class com.google.gson.stream.** { *; }
+
+# Application classes that will be serialized/deserialized over Gson
+-keep class com.google.gson.examples.android.model.** { *; }
+-keep class rf.digworld.headhands.data.model.** {*;}
+
+# Prevent proguard from stripping interface information from TypeAdapterFactory,
+# JsonSerializer, JsonDeserializer instances (so they can be used in @JsonAdapter)
+-keep class * implements com.google.gson.TypeAdapterFactory
+-keep class * implements com.google.gson.JsonSerializer
+-keep class * implements com.google.gson.JsonDeserializer
+
+##---------------End: proguard configuration for Gson  ----------
