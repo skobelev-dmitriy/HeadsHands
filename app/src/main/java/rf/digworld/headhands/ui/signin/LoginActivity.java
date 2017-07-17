@@ -31,6 +31,7 @@ import rf.digworld.headhands.data.model.WeatherResponce;
 import rf.digworld.headhands.ui.base.BaseActivity;
 import rf.digworld.headhands.util.DialogFactory;
 import rf.digworld.headhands.util.Validators;
+import rf.digworld.headhands.util.ViewUtil;
 
 public class LoginActivity extends BaseActivity implements LogInMvpView {
 
@@ -71,7 +72,7 @@ public class LoginActivity extends BaseActivity implements LogInMvpView {
             }
         });
         toolbar.inflateMenu(R.menu.menu_login);
-        //setSupportActionBar(toolbar);
+        ViewUtil.setMiuiStatusBarDarkMode(LoginActivity.this,true);
 
 
     }
